@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'UA_Blade_Runner';
+    src: url('../resources/fonts/UA_Blade_Runner-BoldItalic.woff2') format('woff2'),
+        url('../resources/fonts/UA_Blade_Runner-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../resources/fonts/Roboto-Bold.woff2') format('woff2'),
+        url('../resources/fonts/Roboto-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../resources/fonts/Roboto-Regular.woff2') format('woff2'),
+        url('../resources/fonts/Roboto-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
