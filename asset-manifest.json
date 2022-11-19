@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/loft-taxi/static/css/main.c13c7a7c.css",
+    "main.js": "/loft-taxi/static/js/main.54ddce50.js",
+    "static/media/1.jpg": "/loft-taxi/static/media/1.ad6fab8392915e47d05f.jpg",
+    "static/media/Roboto-Bold.woff": "/loft-taxi/static/media/Roboto-Bold.dbe876e60713f2ed702f.woff",
+    "static/media/Roboto-Regular.woff": "/loft-taxi/static/media/Roboto-Regular.6b0fdfcf61f93c0958db.woff",
+    "static/media/Roboto-Bold.woff2": "/loft-taxi/static/media/Roboto-Bold.12b531a8e701a7b72774.woff2",
+    "static/media/Roboto-Regular.woff2": "/loft-taxi/static/media/Roboto-Regular.fdfc325d19c52a6b4e03.woff2",
+    "static/media/UA_Blade_Runner-BoldItalic.woff": "/loft-taxi/static/media/UA_Blade_Runner-BoldItalic.407d765df4baa286cf5d.woff",
+    "static/media/UA_Blade_Runner-BoldItalic.woff2": "/loft-taxi/static/media/UA_Blade_Runner-BoldItalic.750ede9e6a7913606a0d.woff2",
+    "index.html": "/loft-taxi/index.html",
+    "main.c13c7a7c.css.map": "/loft-taxi/static/css/main.c13c7a7c.css.map",
+    "main.54ddce50.js.map": "/loft-taxi/static/js/main.54ddce50.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c13c7a7c.css",
+    "static/js/main.54ddce50.js"
+  ]
+}
