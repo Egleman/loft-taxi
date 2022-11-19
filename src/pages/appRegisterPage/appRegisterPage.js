@@ -22,7 +22,7 @@ const AppRegisterPage = () => {
                 </form>
                 <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => dispatch(inside())}>Войти</button></div>
             </div>
-        </div>
+        </div> 
     )
 }
 
