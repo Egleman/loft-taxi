@@ -5,7 +5,7 @@ const AppRegisterPage = () => {
     const dispatch = useDispatch();
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(map());
+        dispatch(map()); 
     }
     return (
         <div className='login'>
