@@ -72,6 +72,7 @@
             border: none;
             height: 60px;
             margin-bottom: 35px;
+            margin-top: 45px;
             cursor: pointer;
             &:hover {
                 background: #FFA842;
@@ -86,15 +87,21 @@
         display: flex;
         width: 100%;
         justify-content: flex-end;
-        margin: 15px 0px 45px 0px;
+        margin-top: 15px;
     }
     &__new {
         font-size: 16px;
         line-height: 19px;
         text-align: center;
         color: #828282;
-        a {
+        button {
             color: #FDBF5A;
+            padding: 0;
+            background: transparent;
+            border: none;
+            display: inline;
+            font-size: 16px;
+            line-height: 19px;
         }
     }
 }

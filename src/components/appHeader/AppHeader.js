@@ -1,6 +1,11 @@
+import { useSelector, useDispatch } from "react-redux";
+import {exit, profile, map} from '../../action';
 import './appHeader.scss';
 
 const AppHeader = () => {
+    const classActiveMap = useSelector(state => state.page) === "Map"  ? 'active' : null
+    const classActiveProfile = useSelector(state => state.page) === "Profile"  ? 'active' : null
+    const dispatch = useDispatch();
     return (
         <header className="header">
             <a className='header__logo'>
@@ -20,9 +25,9 @@ const AppHeader = () => {
             </a>
             <nav>
                 <ul>
-                    <li><a href='#'>Карта</a></li>
-                    <li><a href='#'>Профиль</a></li>
-                    <li><a href='#'>Выйти</a></li>
+                    <li><a href='#' className={classActiveMap} onClick={() => dispatch(map())}>Карта</a></li>
+                    <li><a href='#' className={classActiveProfile} onClick={() => dispatch(profile())}>Профиль</a></li>
+                    <li><a href='#' onClick={() => dispatch(exit())}>Выйти</a></li> 
                 </ul>
             </nav> 
         </header>
