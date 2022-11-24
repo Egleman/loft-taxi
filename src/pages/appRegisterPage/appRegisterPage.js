@@ -21,7 +21,7 @@ const AppRegisterPage = () => {
                     <input type="password" name="password" placeholder='*************' id='password'></input>
                     <button type='submit'>Зарегистрироваться</button>
                 </form>
-                <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => setContext({...context, page: 'Login'})}>Войти</button></div>
+                <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => setContext({...context, loginPage: true})}>Войти</button></div>
             </div>
         </div> 
     )

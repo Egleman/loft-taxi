@@ -70,7 +70,7 @@ const AppLoginPage = () => {
                     <a href='#' className='login__reset'>Забыли пароль?</a>
                     <button type='submit'>Войти</button>
                 </form>
-                <div className='login__new'>Новый пользователь? <button href='#' className='login__new-user' onClick={() => setContext({...context, page: 'Register'})}>Регистрация</button></div>
+                <div className='login__new'>Новый пользователь? <button href='#' className='login__new-user' onClick={() => setContext({...context, loginPage: false})}>Регистрация</button></div>
             </div>
         </div>
     )
