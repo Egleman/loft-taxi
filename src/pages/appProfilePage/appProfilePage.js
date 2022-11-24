@@ -1,4 +1,91 @@
+import Inputmask from "inputmask";
+import { useSelector, useDispatch } from "react-redux";
+import { useRef, useEffect, useState } from "react";
+import { cardDetails, map } from "../../redux/action";
+
 const AppProfilePage = () => {
+    const [cardNumber, setCardNumber] = useState('0000  0000  0000  0000');
+    const [name, setName] = useState('Name LastName');
+    const [time, setTime] = useState('05/08');
+    const [secret, setSecret] = useState(0);
+
+    const dispatch = useDispatch();
+
+    const inputNumber = useRef();
+    const inputTime = useRef();
+    const inputSecret = useRef();
+
+    let numberCard = new Inputmask({
+        mask: '9999 9999 9999 9999',
+        showMaskOnHover: false,
+        showMaskOnFocus: false,
+        jitMasking: true,
+        inputmode: 'tel'
+    });
+    let timeCard = new Inputmask({
+        mask: '99/99',
+        showMaskOnHover: false,
+        showMaskOnFocus: false,
+        jitMasking: true,
+        inputmode: 'tel'
+    });
+    let secretCard = new Inputmask({
+        mask: '999',
+        showMaskOnHover: false,
+        showMaskOnFocus: false,
+        jitMasking: true,
+        inputmode: 'tel'
+    });
+    useEffect(() => {
+        numberCard.mask(inputNumber.current);
+        timeCard.mask(inputTime.current);
+        secretCard.mask(inputSecret.current)
+    },)
+    const customTrim = (val) => {
+        val = val.replace(/\s+/g, " ");
+        val = val.replace(/-+/g, '-');
+        val = val.replace(/\(+/g, '(');
+        val = val.replace(/\)+/g, ')');
+        val = val.replace(/^[ |\-+]/g, '');
+        val = val.replace(/[ |\-+]$/g, '');
+        return val;
+    }
+    const onNumberCard = (e) => {
+        setCardNumber(e.target.value)
+        if (e.target.value.length === 0) {
+            setCardNumber('0000  0000  0000  0000')
+        }
+    }
+    const onBlur = (e) => {
+        let val = e.target.value;
+        val = customTrim(val);
+        e.target.value = val;
+        setName(val);
+    }
+    const onName = (e) => {
+        e.target.value = e.target.value.replace(/[^a-zA-z \-}]$/ig, '')
+        setName(e.target.value.replace(/[^a-zA-z \-}]$/ig, ''))
+        if (e.target.value.length === 0) {
+            setName('Ivan Ivanov');
+        }
+    }
+    const onTime = (e) => {
+        setTime(e.target.value);
+        if (e.target.value.length === 0) {
+            setTime('05/08')
+        }
+    }
+    const onSecret = (e) => {
+        setSecret(e.target.value);
+    }
+    const saveData = () => {
+        if (name.toLowerCase() !== 'ivan ivanov' && time !== '05/08' && cardNumber !== '0000 0000 0000 0000' && secret !== 0) {
+            dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret});
+            dispatch(cardDetails());
+            dispatch(map());
+        }
+        // dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret})
+    }
     return (
         <div className="profile">
             <div className="profile__wrapper">
@@ -7,17 +94,17 @@ const AppProfilePage = () => {
                 <div className="profile__flex">
                     <form className='profile__form' method='post'> 
                         <label htmlFor='name'>Имя владельца</label>
-                        <input type="text" name='name' placeholder='Loft' id='name'></input>
+                        <input type="text" name='name' placeholder='Ivan Ivanov' className="profile__form-name" onBlur={(e) => onBlur(e)} onInput={(e) => onName(e)} id='name'></input>
                         <label htmlFor='password'>Номер карты</label>
-                        <input type="text" name="number" placeholder='5545  2300  3432  4521' id='number'></input>
+                        <input type="tel" name="number" placeholder='5545  2300  3432  4521' id='number' ref={inputNumber} onInput={(e) => onNumberCard(e)}></input>
                         <div className="profile__form-flex">
                             <div>
                                 <label htmlFor='time'>MM/YY</label>
-                                <input type="text" name='time' placeholder='05/08' id='time'></input>
+                                <input type="text" name='time' placeholder='05/08' id='time' ref={inputTime} onInput={(e) => onTime(e)}></input>
                             </div>
                             <div>
                                 <label htmlFor='secret'>CVC</label>
-                                <input type="text" name='secret' placeholder='667' id='secret'></input>
+                                <input type="text" name='secret' placeholder='667'  id='secret' ref={inputSecret} onInput={(e) => onSecret(e)}></input>
                             </div>
                         </div>
                     </form>
@@ -35,9 +122,9 @@ const AppProfilePage = () => {
                                 <path d="M13.3457 13.3456L15.3874 15.3873" stroke="#FDBF5A" strokeWidth="2"/>
                                 <path d="M20.7256 14.8015L18.6839 16.8431" stroke="#FDBF5A" strokeWidth="2"/>
                             </svg>
-                            <p>05/08</p>
+                            <p>{time}</p>
                         </div>
-                        <div className="profile__card-middle"><span>5545</span><span>2300</span><span>3432</span><span>4521</span></div>
+                        <div className="profile__card-middle"><span>{cardNumber}</span></div>
                         <div className="profile__card-bottom">
                             <svg width="30" height="27" viewBox="0 0 30 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M11.5 26.5H17.5V4.5H29C29.1667 3.33333 28.5 0.8 24.5 0H11.5V26.5Z" fill="#E1E1E1"/>
@@ -58,9 +145,10 @@ const AppProfilePage = () => {
                                 </g>
                             </svg>
                         </div>
+                        <div className="profile__card-name"><span>{name}</span></div>
                     </div>
                 </div>
-                <button type='submit'>Сохранить</button>
+                <button type='submit' onClick={saveData}>Сохранить</button>
             </div>
         </div>
     )

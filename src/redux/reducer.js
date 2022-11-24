@@ -1,6 +1,15 @@
+import { act } from "react-dom/test-utils";
+
 const initialState = {
     page: 'Login',
     loginPage: true,
+    cardDetails: false,
+    cardData: {
+      name: '',
+      time: '',
+      number: '',
+      secret: ''
+    }
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +38,21 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         page: state.page = 'Profile'
+      };
+    case "CARD-DETAILS": 
+      return {
+        ...state,
+        cardDetails: state.cardDetails = true
+      };
+    case "DATACARD": 
+      return {
+        ...state, 
+        cardData: state.cardData = {
+          name: action.name,
+          time: action.time,
+          secret: action.secret,
+          number: action.cardNumber
+        }
       };
     default:  return state;
   }

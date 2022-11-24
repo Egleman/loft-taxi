@@ -12,6 +12,9 @@
         display: flex;
         align-items: center;
         gap: 15px;
+        background: transparent;
+        border: none;
+        padding: 0;
         svg {
             display: flex;
             flex-shrink: 0;
@@ -35,12 +38,16 @@
             align-items: center;
             gap: 45px;
             li {
-                a {
+                button {
+                    font-family: 'Roboto', sans-serif;
                     font-weight: 400;
                     font-size: 21px;
                     line-height: 25px;
                     color: #FFFFFF;
                     transition: .3s all;
+                    border: none;
+                    background: transparent;
+                    padding: 0;
                     &:hover {
                         color: #FDBF5A;
                     }

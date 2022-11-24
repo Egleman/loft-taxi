@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import {exit, profile, map} from '../../action';
+import {exit, profile, map} from '../../redux/action';
 import './appHeader.scss';
 
 const AppHeader = () => {
@@ -8,7 +8,7 @@ const AppHeader = () => {
     const dispatch = useDispatch();
     return (
         <header className="header">
-            <a className='header__logo'>
+            <button className='header__logo'>
                 <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M30.5 61C47.3447 61 61 47.3447 61 30.5C61 26.9626 60.3978 23.5658 59.2903 20.4066L20.4066 59.2903C23.5658 60.3978 26.9626 61 30.5 61ZM5.8537 48.4705L20.8189 33.5053L3.53949 16.2258C1.27994 20.4847 0 25.3429 0 30.5C0 37.219 2.17264 43.4306 5.8537 48.4705ZM16.2258 3.53949L33.5053 20.8189L48.4705 5.85371C43.4306 2.17264 37.219 0 30.5 0C25.3429 0 20.4847 1.27994 16.2258 3.53949Z" fill="#FDBF5A"/>
                     <path d="M10.0534 10.1304L13.8274 13.9044" stroke="#FDBF5A" strokeWidth="4"/>
@@ -22,15 +22,15 @@ const AppHeader = () => {
                     <path d="M38.3108 27.3604L34.5368 31.1344" stroke="#FDBF5A" strokeWidth="4"/>
                 </svg>
                 <p>loft<span>taxi</span></p>
-            </a>
+            </button>
             <nav>
                 <ul>
-                    <li><a href='#' className={classActiveMap} onClick={() => dispatch(map())}>Карта</a></li>
-                    <li><a href='#' className={classActiveProfile} onClick={() => dispatch(profile())}>Профиль</a></li>
-                    <li><a href='#' onClick={() => dispatch(exit())}>Выйти</a></li> 
+                    <li><button className={classActiveMap} onClick={() => dispatch(map())}>Карта</button></li>
+                    <li><button className={classActiveProfile} onClick={() => dispatch(profile())}>Профиль</button></li>
+                    <li><button onClick={() => dispatch(exit())}>Выйти</button></li> 
                 </ul>
             </nav> 
-        </header>
+        </header> 
     )
 }
 

@@ -1,5 +1,5 @@
 // import './appLoginPage';
-import {register, map} from '../../action';
+import {register, map} from '../../redux/action';
 import { useDispatch } from "react-redux";
 
 const AppLoginPage = () => {

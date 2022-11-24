@@ -1,4 +1,4 @@
-import {inside, map} from '../../action';
+import {inside, map} from '../../redux/action';
 import { useDispatch } from "react-redux";
 
 const AppRegisterPage = () => {
