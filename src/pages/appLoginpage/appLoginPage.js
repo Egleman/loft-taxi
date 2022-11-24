@@ -1,34 +1,68 @@
 // import './appLoginPage';
 import {register, map} from '../../redux/action';
 import { useDispatch } from "react-redux";
+import { useRef, useEffect, useState } from "react";
 
 const AppLoginPage = () => {
     const dispatch = useDispatch();
-    const dataBase = {
-        login: "test@test.com",
-        password: "123123"
-    }
+    const [login, setLogin] = useState('test@test.com');
+    const [password, setPassword] = useState('123123');
+    const [errorLabelLogin, setErrorLabelLogin] = useState(false);
+    const [errorLabelPassword, setErrorLabelPassword] = useState(false);
+    const [errorForm, setErrorForm] = useState(false);
+
     const inputs = {
         login: '',
         password: ''
     }
+    const focusLogin = () => {
+        setErrorLabelLogin(false);
+    }
+    const focusPassword = () => {
+        setErrorLabelPassword(false);
+    }
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorLabelLogin(false);
+        }, 3000)
+    }, [errorLabelLogin])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorLabelPassword(false);
+        }, 3000)
+    }, [errorLabelPassword])
+    useEffect(() => {
+        setTimeout(() => {
+            setErrorForm(false);
+        }, 300)
+    }, [errorLabelPassword])
+
     const onSubmit = (e) => {
         e.preventDefault();
-        if (inputs.login === dataBase.login && inputs.password === dataBase.password) {
+        if (inputs.login.length === 0) {
+            setErrorLabelLogin(true);
+            setErrorForm(true)
+        }
+        if (inputs.password.length === 0) {
+            setErrorLabelPassword(true);
+            setErrorForm(true)
+        }
+        if (inputs.login === login && inputs.password === password) {
             dispatch(map());
         }
     }
     return (
         <div className='login'>
-            <div className='login__wrapper'>
+            <div className='login__wrapper' style={errorForm ? {animation: 'move .3s linear'} : null}>
                 <div className='login__title'>Войти</div>
-                <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)}> 
-                    <label htmlFor='email'>Email</label>
-                    <input type="text" name='email' placeholder='mail@mail.ru' id='email' onInput={(e) => {
+                <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)} autoComplete="off"> 
+                    <label htmlFor='email' style={errorLabelLogin ? {color: 'red'} : null}>Email</label>
+                    <input type="text" autoComplete="off" name='email' placeholder='mail@mail.ru' id='email' onFocus={focusLogin} onInput={(e) => {
                         inputs.login = e.target.value
                     }}></input>
-                    <label htmlFor='password'>Пароль</label>
-                    <input type="password" name="password" placeholder='*************' id='password' onInput={(e) => {
+                    <label htmlFor='password' style={errorLabelPassword ? {color: 'red'} : null}>Пароль</label>
+                    <input type="password" autoComplete="off" name="password" placeholder='*************' onFocus={focusPassword} id='password' onInput={(e) => {
                         inputs.password = e.target.value
                     }}></input>
                     <a href='#' className='login__reset'>Забыли пароль?</a>

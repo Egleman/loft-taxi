@@ -4,7 +4,8 @@ import './appHeader.scss';
 
 const AppHeader = () => {
     const classActiveMap = useSelector(state => state.page) === "Map"  ? 'active' : null
-    const classActiveProfile = useSelector(state => state.page) === "Profile"  ? 'active' : null
+    const classActive = useSelector(state => state.page);
+    const classActiveProfile = classActive === 'Profile' || classActive === 'SavePage'  ? 'active' : null
     const dispatch = useDispatch();
     return (
         <header className="header">

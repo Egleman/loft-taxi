@@ -1,14 +1,12 @@
-import { act } from "react-dom/test-utils";
-
 const initialState = {
     page: 'Login',
     loginPage: true,
     cardDetails: false,
     cardData: {
-      name: '',
-      time: '',
-      number: '',
-      secret: ''
+      name: 'IVAN IVANOV',
+      time: '05/08',
+      number: '0000 0000 0000 0000',
+      secret: '667'
     }
 };
 
@@ -28,6 +26,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         page: state.page = 'Map'
+      };
+    case "SAVE-PAGE": 
+      return {
+        ...state,
+        page: state.page = 'SavePage'
       };
     case "EXIT": 
       return {

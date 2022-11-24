@@ -5,6 +5,7 @@ import AppRegisterPage from "../../pages/appRegisterPage/appRegisterPage";
 import AppHeader from "../appHeader/AppHeader";
 import AppProfilePage from '../../pages/appProfilePage/appProfilePage';
 import AppMapPage from "../../pages/appMapPage/appMapPage";
+import AppSavePage from "../../pages/appSavePage/appSavePage";
 import { useSelector } from "react-redux";
 
 function Greeting() {
@@ -22,12 +23,14 @@ const App = () => {
     const header = useSelector(state => state.page) !== "Login" ? <AppHeader/> : null;
     const profile = useSelector(state => state.page) === "Profile" ? <AppProfilePage/> : null;
     const map = useSelector(state => state.page) === "Map" ? <AppMapPage/> : null;
+    const savePage = useSelector(state => state.page) === "SavePage" ? <AppSavePage /> : null;
     return (
         <div className="app">
             {header}
             {loginPage}
             {profile}
             {map}
+            {savePage}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 .map {
-    background: url("../../resources/img/1.jpg") center/cover no-repeat;
+    // background: url("../../resources/img/1.jpg") center/cover no-repeat;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -27,6 +27,7 @@
         border-radius: 10px;
         max-width: 490px;
         width: 100%;
+        z-index: 1;
         &_padding {
             padding: 30px;
         }
@@ -41,6 +42,15 @@
         }
         &-input {
             padding: 30px 30px 0px 30px;
+            position: relative;
+            svg {
+                display: flex;
+                position: absolute;
+                top: 50%;
+                transform: translate(0, -50%);
+                flex-shrink: 0;
+                left: 30px;
+            }
             input {
                 background: transparent;
                 border-bottom: 2px solid #E4E4E4;
@@ -54,6 +64,8 @@
                 color: #000;
                 margin-bottom: 15px;
                 width: 100%;
+                padding-left: 30px;
+                box-sizing: border-box;
                 &:not(:last-of-type) {
                     margin-bottom: 25px;
                 }

@@ -1,13 +1,13 @@
 import Inputmask from "inputmask";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef, useEffect, useState } from "react";
-import { cardDetails, map } from "../../redux/action";
+import { cardDetails, savePage } from "../../redux/action";
 
 const AppProfilePage = () => {
-    const [cardNumber, setCardNumber] = useState('0000  0000  0000  0000');
-    const [name, setName] = useState('Name LastName');
-    const [time, setTime] = useState('05/08');
-    const [secret, setSecret] = useState(0);
+    const [cardNumber, setCardNumber] = useState(useSelector(state => state.cardData.number));
+    const [name, setName] = useState(useSelector(state => state.cardData.name));
+    const [time, setTime] = useState(useSelector(state => state.cardData.time));
+    const [secret, setSecret] = useState(useSelector(state => state.cardData.secret));
 
     const dispatch = useDispatch();
 
@@ -82,7 +82,7 @@ const AppProfilePage = () => {
         if (name.toLowerCase() !== 'ivan ivanov' && time !== '05/08' && cardNumber !== '0000 0000 0000 0000' && secret !== 0) {
             dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret});
             dispatch(cardDetails());
-            dispatch(map());
+            dispatch(savePage());
         }
         // dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret})
     }
