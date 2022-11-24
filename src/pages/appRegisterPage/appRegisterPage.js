@@ -1,11 +1,12 @@
-import {inside, map} from '../../redux/action';
-import { useDispatch } from "react-redux";
+import { useContext } from "react";
+import dataContext from "../../context";
+import PropTypes from "prop-types";
 
 const AppRegisterPage = () => {
-    const dispatch = useDispatch();
+    const [context, setContext] = useContext(dataContext);
+
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(map()); 
     }
     return (
         <div className='login'>
@@ -20,10 +21,14 @@ const AppRegisterPage = () => {
                     <input type="password" name="password" placeholder='*************' id='password'></input>
                     <button type='submit'>Зарегистрироваться</button>
                 </form>
-                <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => dispatch(inside())}>Войти</button></div>
+                <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => setContext({...context, page: 'Login'})}>Войти</button></div>
             </div>
         </div> 
     )
 }
-
+AppRegisterPage.propTypes = {
+    pageMap: PropTypes.string,
+    pageProfile: PropTypes.string,
+    pageLogin: PropTypes.string
+}
 export default AppRegisterPage;

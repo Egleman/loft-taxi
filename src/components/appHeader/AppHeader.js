@@ -1,11 +1,14 @@
-import { useSelector, useDispatch } from "react-redux";
-import {exit, profile, map} from '../../redux/action';
+import dataContext from "../../context";
+import { useContext } from "react";
+
 import './appHeader.scss';
 
 const AppHeader = () => {
-    const classActiveMap = useSelector(state => state.page) === "Map"  ? 'active' : null
-    const classActiveProfile = useSelector(state => state.page) === "Profile"  ? 'active' : null
-    const dispatch = useDispatch();
+    const [context, setContext] = useContext(dataContext);
+
+    const classActiveMap = context.page === "Map"  ? 'active' : null
+    const classActive = context.page;
+    const classActiveProfile = classActive === 'Profile' || classActive === 'SavePage'  ? 'active' : null
     return (
         <header className="header">
             <button className='header__logo'>
@@ -25,9 +28,9 @@ const AppHeader = () => {
             </button>
             <nav>
                 <ul>
-                    <li><button className={classActiveMap} onClick={() => dispatch(map())}>Карта</button></li>
-                    <li><button className={classActiveProfile} onClick={() => dispatch(profile())}>Профиль</button></li>
-                    <li><button onClick={() => dispatch(exit())}>Выйти</button></li> 
+                    <li><button className={classActiveMap} onClick={() => setContext({...context, page: 'Map'})}>Карта</button></li>
+                    <li><button className={classActiveProfile} onClick={() => setContext({...context, page: 'Profile'})}>Профиль</button></li>
+                    <li><button onClick={() => setContext({...context, page: 'Login'})}>Выйти</button></li> 
                 </ul>
             </nav> 
         </header> 

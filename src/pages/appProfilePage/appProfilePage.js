@@ -1,15 +1,15 @@
 import Inputmask from "inputmask";
-import { useSelector, useDispatch } from "react-redux";
-import { useRef, useEffect, useState } from "react";
-import { cardDetails, map } from "../../redux/action";
+import { useRef, useEffect, useState, useContext } from "react";
+import dataContext from '../../context';
+import PropTypes from "prop-types";
 
 const AppProfilePage = () => {
-    const [cardNumber, setCardNumber] = useState('0000  0000  0000  0000');
-    const [name, setName] = useState('Name LastName');
-    const [time, setTime] = useState('05/08');
-    const [secret, setSecret] = useState(0);
+    const [context, setContext] = useContext(dataContext);
 
-    const dispatch = useDispatch();
+    const [cardNumber, setCardNumber] = useState(context.number);
+    const [namee, setName] = useState(context.name);
+    const [timee, setTime] = useState(context.time);
+    const [secrete, setSecret] = useState(context.secret);
 
     const inputNumber = useRef();
     const inputTime = useRef();
@@ -79,12 +79,9 @@ const AppProfilePage = () => {
         setSecret(e.target.value);
     }
     const saveData = () => {
-        if (name.toLowerCase() !== 'ivan ivanov' && time !== '05/08' && cardNumber !== '0000 0000 0000 0000' && secret !== 0) {
-            dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret});
-            dispatch(cardDetails());
-            dispatch(map());
+        if (namee.toLowerCase() !== 'ivan ivanov' && timee !== '05/08' && cardNumber !== '0000 0000 0000 0000' && secrete !== 0) {
+            setContext({...context, number: cardNumber, name: namee, time: timee, secret: secrete, cardDetails: true, page: 'SavePage'});
         }
-        // dispatch({ type: 'DATACARD', cardNumber: cardNumber, name: name, time: time, secret: secret})
     }
     return (
         <div className="profile">
@@ -122,7 +119,7 @@ const AppProfilePage = () => {
                                 <path d="M13.3457 13.3456L15.3874 15.3873" stroke="#FDBF5A" strokeWidth="2"/>
                                 <path d="M20.7256 14.8015L18.6839 16.8431" stroke="#FDBF5A" strokeWidth="2"/>
                             </svg>
-                            <p>{time}</p>
+                            <p>{timee}</p>
                         </div>
                         <div className="profile__card-middle"><span>{cardNumber}</span></div>
                         <div className="profile__card-bottom">
@@ -145,12 +142,17 @@ const AppProfilePage = () => {
                                 </g>
                             </svg>
                         </div>
-                        <div className="profile__card-name"><span>{name}</span></div>
+                        <div className="profile__card-name"><span>{namee}</span></div>
                     </div>
                 </div>
                 <button type='submit' onClick={saveData}>Сохранить</button>
             </div>
         </div>
     )
+}
+AppProfilePage.propTypes = {
+    pageMap: PropTypes.string,
+    pageProfile: PropTypes.string,
+    pageLogin: PropTypes.string
 }
 export default AppProfilePage;
