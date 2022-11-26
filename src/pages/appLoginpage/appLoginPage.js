@@ -76,7 +76,7 @@ const AppLoginPage = () => {
         </div>
     )
 }
-AppLoginPage.propTypes = {
+AppLoginPage.propTypes = { 
     pageMap: PropTypes.string,
     pageProfile: PropTypes.string,
     pageLogin: PropTypes.string
