@@ -86,7 +86,7 @@ const AppProfilePage = () => {
     return (
         <div className="profile">
             <div className="profile__wrapper">
-                <div className="profile__title">Профиль</div>
+                <div data-testid="ProfilePage" className="profile__title">Профиль</div>
                 <div className="profile__subtitle">Ввдеите платежные данные</div>
                 <div className="profile__flex">
                     <form className='profile__form' method='post'> 

@@ -11,6 +11,6 @@ import { createContext } from "react";
 //       secret: '667'
 //     },
 // })
-const dataContext = createContext()
+const dataContext = createContext([[],() => {}])
 
 export default dataContext;

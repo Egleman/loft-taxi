@@ -11,9 +11,6 @@ import { useState } from "react";
 
 const App = () => {
     const {Provider} = dataContext;
-    // const changePageMap = () => {
-    //     setState({...state, page: 'Map'})
-    // }
 
     const [state, setState] = useState({
         page: 'Login',
@@ -24,8 +21,6 @@ const App = () => {
         number: '0000 0000 0000 0000',
         secret: '667'
     })
-
-    
 
     function Greeting() {
         const page = state.loginPage ? <AppLoginPage/> : <AppRegisterPage />;

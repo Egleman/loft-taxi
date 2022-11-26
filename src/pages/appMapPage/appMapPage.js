@@ -11,7 +11,7 @@ import carImg3 from "../../resources/img/4.png";
 const ZeroCard = () => {
     const [context, setContext] = useContext(dataContext);
     return (
-        <div className="map__card map__card_padding">
+        <div data-testid="ZeroDataCard" className="map__card map__card_padding" >
             <div className="map__card-title">Заполните платежные данные</div>
             <div className="map__card-subtitle">Укажите информацию о банковской карте, чтобы сделать заказ.</div>
             <button className="map__cars-button" onClick={() => setContext({...context, page: 'Profile'})}>Перейти в профиль</button>
@@ -85,12 +85,12 @@ const DoneCard = () => {
 }
 
 const AppMapPage = () => {
-    const [context, setContext] = useContext(dataContext);
+    const [context] = useContext(dataContext);
 
     const mapContainer = useRef(null);
     const [lng, setLng] = useState(30.3056504);
     const [lat, setLat] = useState(59.9429126);
-    const [zoom, setZoom] = useState(12);
+    const [zoom, setZoom] = useState(12); 
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -99,15 +99,18 @@ const AppMapPage = () => {
         style: 'mapbox://styles/egleman/claierb1f000h15mmo0xqzw88',
         center: [lng, lat],
         zoom: zoom,
-    })
-    if (!map.current) return; // wait for map to initialize
-    map.current.on('move', () => {
-    setLng(map.current.getCenter().lng.toFixed(4));
-    setLat(map.current.getCenter().lat.toFixed(4));
-    setZoom(map.current.getZoom().toFixed(2));
-    });
-});
+        })
+        if (!map.current) return; // wait for map to initialize
+        map.current.on('move', () => {
+        setLng(map.current.getCenter().lng.toFixed(4));
+        setLat(map.current.getCenter().lat.toFixed(4));
+        setZoom(map.current.getZoom().toFixed(2));
+        });
 
+        return () => {
+            map.remove();
+        }
+    });
 
     const fullCardDetails = context.cardDetails ? <DoneCard/> : <ZeroCard/>;
     return (

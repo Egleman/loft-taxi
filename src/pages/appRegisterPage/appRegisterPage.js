@@ -10,8 +10,8 @@ const AppRegisterPage = () => {
     }
     return (
         <div className='login'>
-            <div className='login__wrapper'>
-                <div className='login__title'>Регистрация</div>
+            <div  className='login__wrapper'>
+                <div data-testid="RegisterPage" className='login__title'>Регистрация</div>
                 <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)}>
                     <label htmlFor='email'>Email</label>
                     <input type="text" name='email' placeholder='mail@mail.ru' id='email'></input>

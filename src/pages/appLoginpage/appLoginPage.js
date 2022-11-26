@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 
 const AppLoginPage = () => {
     
-    const [context, setContext] = useContext(dataContext);
 
     const [login, setLogin] = useState('test@test.com');
     const [password, setPassword] = useState('123123');
     const [errorLabelLogin, setErrorLabelLogin] = useState(false);
     const [errorLabelPassword, setErrorLabelPassword] = useState(false);
     const [errorForm, setErrorForm] = useState(false);
+
+    const [context, setContext] = useContext(dataContext);
 
     const inputs = {
         login: '',
@@ -56,8 +57,8 @@ const AppLoginPage = () => {
     }
     return (
         <div className='login'>
-            <div className='login__wrapper' style={errorForm ? {animation: 'move .3s linear'} : null}>
-                <div className='login__title'>Войти</div>
+            <div  className='login__wrapper' style={errorForm ? {animation: 'move .3s linear'} : null}>
+                <div data-testid="LoginPage" className='login__title'>Войти</div>
                 <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)} autoComplete="off"> 
                     <label htmlFor='email' style={errorLabelLogin ? {color: 'red'} : null}>Email</label>
                     <input type="text" autoComplete="off" name='email' placeholder='mail@mail.ru' id='email' onFocus={focusLogin} onInput={(e) => {
