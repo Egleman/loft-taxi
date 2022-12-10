@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import AppLogoLogin from "../../components/appLogoLogin/appLogoLogin";
 import {Link} from 'react-router-dom'
 import {loginPage, registerPage, authenticate} from '../../redux/action';
+import {store} from '../../redux/store';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -52,10 +53,26 @@ const Login = () => {
         }
         const textLogin = inputs.login;
         const textPassword = inputs.password;
-        // if (inputs.login === login && inputs.password === password) {
-            
-        // }
-     
+   
+        // fetch(
+        //     'https://loft-taxi.glitch.me/auth', {
+        //       method: 'POST',
+        //       headers: {
+        //         'Content-Type': 'application/json'
+        //       },
+        //       body: JSON.stringify({email: textLogin, password: textPassword})
+        //     }
+        //   )
+        // .then(res => res.json())
+        // .then(answer => answer.success)
+
+
+        authenticate(textLogin, textPassword)
+
+
+        console.log(textLogin);
+        console.log(textPassword);
+        console.log(store.getState());
     }
     return (
         <div className='login'>

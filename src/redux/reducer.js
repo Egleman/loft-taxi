@@ -14,10 +14,10 @@ const initialState = {
     // }
     startPage: 'login',
     isLoggedIn: false,
-    cardNumber: undefined,
-    cardName: undefined,
-    expiryDate: undefined,
-    cvc: undefined
+    cardNumber: null,
+    cardName: null,
+    expiryDate: null,
+    cvc: null
 };
 
 // const reducer = (state = initialState, action) => {
@@ -87,22 +87,16 @@ const reducer = (state = initialState, action) => {
         expiryDate: state.expiryDate = action.payload.expiryDate,
         cvc: state.cvc = action.payload.cvc
       };
-      case LOG_IN: {
+      case "LOG_IN": {
         return {
           ...state,
           isLoggedIn: state.isLoggedIn = true
         }
       }
-      case LOG_OUT: {
+      case "LOG_OUT": {
         return {
           ...state,
           isLoggedIn: state.isLoggedIn = false
-        }
-      }
-      case "AUTHENTICATE": {
-        return {
-          ...state,
-          isLoggedIn: state.isLoggedIn = true
         }
       }
       case 'LOGIN_PAGE': {

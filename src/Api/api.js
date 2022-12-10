@@ -5,7 +5,7 @@ export const serverLogin = async (email, password) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({email: email, password: password})
       }
     )
     .then(res => res.json())
