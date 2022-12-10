@@ -1,15 +1,17 @@
-// import './appLoginPage';
-import {register, map} from '../../redux/action';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRef, useEffect, useState } from "react";
+import AppLogoLogin from "../../components/appLogoLogin/appLogoLogin";
+import {Link} from 'react-router-dom'
+import {loginPage, registerPage, authenticate} from '../../redux/action';
 
-const AppLoginPage = () => {
+const Login = () => {
     const dispatch = useDispatch();
-    const [login, setLogin] = useState('test@test.com');
-    const [password, setPassword] = useState('123123');
     const [errorLabelLogin, setErrorLabelLogin] = useState(false);
     const [errorLabelPassword, setErrorLabelPassword] = useState(false);
     const [errorForm, setErrorForm] = useState(false);
+
+    const login = useRef();
+    const password = useRef();
 
     const inputs = {
         login: '',
@@ -48,9 +50,12 @@ const AppLoginPage = () => {
             setErrorLabelPassword(true);
             setErrorForm(true)
         }
-        if (inputs.login === login && inputs.password === password) {
-            dispatch(map());
-        }
+        const textLogin = inputs.login;
+        const textPassword = inputs.password;
+        // if (inputs.login === login && inputs.password === password) {
+            
+        // }
+     
     }
     return (
         <div className='login'>
@@ -58,19 +63,52 @@ const AppLoginPage = () => {
                 <div className='login__title'>Войти</div>
                 <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)} autoComplete="off"> 
                     <label htmlFor='email' style={errorLabelLogin ? {color: 'red'} : null}>Email</label>
-                    <input type="text" autoComplete="off" name='email' placeholder='mail@mail.ru' id='email' onFocus={focusLogin} onInput={(e) => {
+                    <input type="text" autoComplete="off" ref={login} name='email' placeholder='mail@mail.ru' id='email' onFocus={focusLogin} onInput={(e) => {
                         inputs.login = e.target.value
                     }}></input>
                     <label htmlFor='password' style={errorLabelPassword ? {color: 'red'} : null}>Пароль</label>
-                    <input type="password" autoComplete="off" name="password" placeholder='*************' onFocus={focusPassword} id='password' onInput={(e) => {
+                    <input type="password" autoComplete="off" ref={password} name="password" placeholder='*************' onFocus={focusPassword} id='password' onInput={(e) => {
                         inputs.password = e.target.value
                     }}></input>
                     <a href='#' className='login__reset'>Забыли пароль?</a>
                     <button type='submit'>Войти</button>
                 </form>
-                <div className='login__new'>Новый пользователь? <button href='#' className='login__new-user' onClick={() => dispatch(register())}>Регистрация</button></div>
+                <div className='login__new'>Новый пользователь? <button className="login__new-user" onClick={() => dispatch(registerPage())}>Регистрация</button></div>
             </div>
         </div>
+    )
+}
+const Register = () => {
+    const dispatch = useDispatch();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        // dispatch(map()); 
+    }
+    return (
+            <div className='login'>
+                <div className='login__wrapper'>
+                    <div className='login__title'>Регистрация</div>
+                    <form className='login__form' method='post' onSubmit={(e) => onSubmit(e)}>
+                        <label htmlFor='email'>Email</label>
+                        <input type="text" name='email' placeholder='mail@mail.ru' id='email'></input>
+                        <label htmlFor='name'>Как вас зовут?*</label>
+                        <input type="text" name='name' placeholder='mail@mail.ru' id='name'></input>
+                        <label htmlFor='password'>Придумайте пароль*</label>
+                        <input type="password" name="password" placeholder='*************' id='password'></input>
+                        <button type='submit'>Зарегистрироваться</button>
+                    </form>
+                    <div className='login__new'>Уже зарегестрированны? <button href='#' className='login__new-user' onClick={() => dispatch(loginPage())}>Войти</button></div>
+                </div>
+            </div> 
+    )
+}
+const AppLoginPage = () => {
+    const page = useSelector(state => state.startPage);
+    return (
+        <div className="wrapper">
+            <AppLogoLogin/>
+            {page === '/login' ? <Login/> : <Register/>}
+        </div> 
     )
 }
 
