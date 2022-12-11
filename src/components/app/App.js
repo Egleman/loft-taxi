@@ -19,16 +19,30 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 // }
 
 const App = () => {
-    
+    const loginIn = useSelector((state) => state.isLoggedIn);
     return (
         <Router>
             <div className="app">
                 <Switch>
-                    <PrivateRoute exact path="/map" component={AppMapPage} />
-                    <Route exact path="/loft-taxi">
+                    {/* <Route exact path="/loft-taxi">
                         <Redirect to="/"/>
-                    </Route>
-                    <Route exact path="/" component={AppLoginPage}/>
+                    </Route> */}
+                    {
+                        loginIn ? (
+                            <>
+                            <PrivateRoute exact path="/map">
+                                <AppMapPage/>
+                            </PrivateRoute>
+                            </>
+                        ) : (
+                            <>
+                            
+                            <Route exact path="/">
+                                <AppLoginPage/>
+                            </Route>
+                            </>
+                        )
+                    }
                 </Switch>
             </div>
         </Router>

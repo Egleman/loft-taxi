@@ -30,7 +30,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://egleman.github.io/loft-taxi/",
+  "homepage": "https://egleman.github.io/",
   "eslintConfig": {
     "extends": [
       "react-app",

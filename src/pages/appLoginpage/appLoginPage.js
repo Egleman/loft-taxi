@@ -61,10 +61,10 @@ const Login = () => {
         
         if (inputs.login !== '' && inputs.password !== '') {
             dispatch(authenticate(textLogin, textPassword));
-            console.log(isLogin)
-            if (isLogin) {
-                history.push('/map')
-            }
+            // console.log(isLogin)
+            // if (isLogin) {
+            //     history.push('/map')
+            // }
             // navigate('/map');
         }
     }
