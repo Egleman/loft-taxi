@@ -1,6 +1,6 @@
-import { showCardData } from "../redux/action";
+import { showCardData } from "../store/action";
 import { serverSaveCard } from "../Api/api";
-import { SAVE_CARD } from "../redux/action";
+import { SAVE_CARD } from "../store/action";
 
 export const saveCardMiddleware = (store) => (next) => async (action) => {
   if (action.type === SAVE_CARD) {

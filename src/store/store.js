@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux'
-import reducer from './reducer'
+import rootReducer from './reducers/index'
 import { authMiddleware } from '../middlewares/authMiddleware'
 import {saveCardMiddleware} from '../middlewares/saveCardMiddleware'
 
@@ -22,6 +22,6 @@ function loadFromLocalStorage() {
 }
 
 
-export const store = createStore(reducer, loadFromLocalStorage(), applyMiddleware(authMiddleware, saveCardMiddleware))
+export const store = createStore(rootReducer, loadFromLocalStorage(), applyMiddleware(authMiddleware, saveCardMiddleware))
 
 store.subscribe(() => saveToLoсalStorage(store.getState()))

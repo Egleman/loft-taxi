@@ -2,14 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef, useEffect, useState } from "react";
 import AppLogoLogin from "../../components/appLogoLogin/appLogoLogin";
 import {Link} from 'react-router-dom'
-import {loginPage, registerPage, authenticate} from '../../redux/action';
-import {store} from '../../redux/store';
+import {loginPage, registerPage, authenticate} from '../../store/action';
+import {store} from '../../store/store';
+
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [errorLabelLogin, setErrorLabelLogin] = useState(false);
     const [errorLabelPassword, setErrorLabelPassword] = useState(false);
     const [errorForm, setErrorForm] = useState(false);
+
+    let isLogin = useSelector(state => state.AuthReducer.isLoggedIn);
 
     const login = useRef();
     const password = useRef();
@@ -53,26 +58,15 @@ const Login = () => {
         }
         const textLogin = inputs.login;
         const textPassword = inputs.password;
-   
-        // fetch(
-        //     'https://loft-taxi.glitch.me/auth', {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json'
-        //       },
-        //       body: JSON.stringify({email: textLogin, password: textPassword})
-        //     }
-        //   )
-        // .then(res => res.json())
-        // .then(answer => answer.success)
-
-
-        authenticate(textLogin, textPassword)
-
-
-        console.log(textLogin);
-        console.log(textPassword);
-        console.log(store.getState());
+        
+        if (inputs.login !== '' && inputs.password !== '') {
+            dispatch(authenticate(textLogin, textPassword));
+            console.log(isLogin)
+            if (isLogin) {
+                history.push('/map')
+            }
+            // navigate('/map');
+        }
     }
     return (
         <div className='login'>
@@ -120,7 +114,8 @@ const Register = () => {
     )
 }
 const AppLoginPage = () => {
-    const page = useSelector(state => state.startPage);
+    const page = useSelector(state => state.PageReducer.startPage);
+    console.log(page)
     return (
         <div className="wrapper">
             <AppLogoLogin/>
@@ -128,5 +123,4 @@ const AppLoginPage = () => {
         </div> 
     )
 }
-
 export default AppLoginPage;

@@ -1,7 +1,12 @@
 import AppLoginPage from "../../pages/appLoginpage/appLoginPage"; 
 import AppMapPage from "../../pages/appMapPage/appMapPage";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+// import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import {PrivateRoute} from "../../PrivateRoute/PrivateRoute";
+import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 // function Greeting() {
 //     const page = useSelector(state => state.loginPage) ? <AppRegisterPage /> : <AppLoginPage/>;
@@ -14,24 +19,19 @@ import { useDispatch, useSelector } from "react-redux";
 // }
 
 const App = () => {
-    const loginIn = useSelector(state => state.isLoggedIn);
+    
     return (
         <Router>
             <div className="app">
                 <Switch>
-                    <Route exact path="/">
-                        {loginIn ? <Redirect to="/map"/> : <Redirect to="/login"/>}
+                    <PrivateRoute exact path="/map" component={AppMapPage} />
+                    <Route exact path="/loft-taxi">
+                        <Redirect to="/"/>
                     </Route>
-                    <Route exact path="/login">
-                        <AppLoginPage/>
-                    </Route>
-                    <Route exact path="/map">
-                        <AppMapPage/>
-                    </Route>
+                    <Route exact path="/" component={AppLoginPage}/>
                 </Switch>
             </div>
         </Router>
     )
 }
-
 export default App;

@@ -1,10 +1,8 @@
-import { AUTHENTICATE, logIn } from "../redux/action"
-import { serverLogin } from "../Api/api";
-import { useDispatch } from "react-redux";
+import { AUTHENTICATE, logIn } from "../store/action"
+import { serverLogin } from "../Api/api"
 
 export const authMiddleware = (store) => (next) => async (action) => {
-  const dispatch = useDispatch();
-  if (action.type === 'AUTHENTICATE') {
+  if (action.type === AUTHENTICATE) {
     const {email, password} = action.payload
     const success = await serverLogin(email, password)
     if(success) {
