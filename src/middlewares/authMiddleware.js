@@ -1,7 +1,7 @@
-import { AUTHENTICATE, logIn } from "../store/action"
+import { AUTHENTICATE, logIn, Hist } from "../store/action"
 import { serverLogin } from "../Api/api"
 
-export const authMiddleware = (store) => (next) => async (action) => {
+export const AuthMiddleware = (store) => (next) => async (action) => {
   if (action.type === AUTHENTICATE) {
     const {email, password} = action.payload
     const success = await serverLogin(email, password)

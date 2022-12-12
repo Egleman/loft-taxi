@@ -2,6 +2,8 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 // import { connect } from "react-redux";
 import { connect } from "react-redux";
+import AppMapPage from "../pages/appMapPage/appMapPage";
+import { useSelector } from "react-redux";
 
 export const PrivateRoute = connect((state) => ({
   isLoggedIn: state.AuthReducer.isLoggedIn,

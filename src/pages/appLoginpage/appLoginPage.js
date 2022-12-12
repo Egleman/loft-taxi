@@ -1,14 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useRef, useEffect, useState } from "react";
 import AppLogoLogin from "../../components/appLogoLogin/appLogoLogin";
-import {Link} from 'react-router-dom'
 import {loginPage, registerPage, authenticate} from '../../store/action';
-import {store} from '../../store/store';
-
-import { useHistory } from "react-router-dom";
 
 const Login = () => {
-    const history = useHistory();
     const dispatch = useDispatch();
     const [errorLabelLogin, setErrorLabelLogin] = useState(false);
     const [errorLabelPassword, setErrorLabelPassword] = useState(false);
@@ -61,11 +56,6 @@ const Login = () => {
         
         if (inputs.login !== '' && inputs.password !== '') {
             dispatch(authenticate(textLogin, textPassword));
-            // console.log(isLogin)
-            // if (isLogin) {
-            //     history.push('/map')
-            // }
-            // navigate('/map');
         }
     }
     return (

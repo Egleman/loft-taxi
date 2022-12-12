@@ -1,4 +1,4 @@
-import { authMiddleware } from "./authMiddleware"
+import { AuthMiddleware } from "./authMiddleware"
 import { authenticate } from "../store/action"
 import { serverLogin } from "../api"
 
@@ -9,7 +9,7 @@ describe('authMiddleware', () => {
     it('authenticates through api', async () => {
       const dispatch = jest.fn()
 
-      await authMiddleware({dispatch})()(
+      await AuthMiddleware({dispatch})()(
         authenticate('testlogin', 'testpassword')
       )
 
